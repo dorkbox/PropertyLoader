@@ -23,13 +23,12 @@ import java.time.Instant
 ///////////////////////////////
 
 gradle.startParameter.showStacktrace = ShowStacktrace.ALWAYS   // always show the stacktrace!
-gradle.startParameter.warningMode = WarningMode.All
 
 plugins {
-    id("com.dorkbox.GradleUtils") version "1.12"
-    id("com.dorkbox.Licensing") version "2.5.2"
-    id("com.dorkbox.VersionUpdate") version "2.1"
-    id("com.dorkbox.GradlePublish") version "1.10"
+    id("com.dorkbox.GradleUtils") version "2.9"
+    id("com.dorkbox.Licensing") version "2.9.2"
+    id("com.dorkbox.VersionUpdate") version "2.4"
+    id("com.dorkbox.GradlePublish") version "1.11"
 }
 
 object Extras {
@@ -52,9 +51,9 @@ object Extras {
 /////  assign 'Extras'
 ///////////////////////////////
 GradleUtils.load("$projectDir/../../gradle.properties", Extras)
-GradleUtils.fixIntellijPaths()
-GradleUtils.defaultResolutionStrategy()
+GradleUtils.defaults()
 GradleUtils.compileConfiguration(JavaVersion.VERSION_1_8)
+GradleUtils.jpms(JavaVersion.VERSION_1_9)
 
 
 licensing {
@@ -63,22 +62,6 @@ licensing {
         author(Extras.vendor)
         url(Extras.url)
     }
-}
-
-sourceSets {
-    main {
-        java {
-            setSrcDirs(listOf("src"))
-
-            // want to include java files for the source. 'setSrcDirs' resets includes...
-            include("**/*.java")
-        }
-    }
-}
-
-repositories {
-    mavenLocal() // this must be first!
-    jcenter()
 }
 
 tasks.jar.get().apply {
@@ -93,8 +76,6 @@ tasks.jar.get().apply {
         attributes["Implementation-Title"] = "${Extras.group}.${Extras.id}"
         attributes["Implementation-Version"] = Extras.buildDate
         attributes["Implementation-Vendor"] = Extras.vendor
-
-        attributes["Automatic-Module-Name"] = Extras.id
     }
 }
 
