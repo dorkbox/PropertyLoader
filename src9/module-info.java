@@ -1,3 +1,3 @@
-module com.dorkbox.propertyLoader {
+module dorkbox.propertyLoader {
     exports dorkbox.propertyLoader;
 }
