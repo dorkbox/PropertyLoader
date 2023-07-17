@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-import java.time.Instant
-
 ///////////////////////////////
 //////    PUBLISH TO SONATYPE / MAVEN CENTRAL
 ////// TESTING : (to local maven repo) <'publish and release' - 'publishToMavenLocal'>
@@ -25,17 +23,17 @@ import java.time.Instant
 gradle.startParameter.showStacktrace = ShowStacktrace.ALWAYS   // always show the stacktrace!
 
 plugins {
-    id("com.dorkbox.GradleUtils") version "3.11"
-    id("com.dorkbox.Licensing") version "2.20"
-    id("com.dorkbox.VersionUpdate") version "2.5"
-    id("com.dorkbox.GradlePublish") version "1.17"
+    id("com.dorkbox.GradleUtils") version "3.17"
+    id("com.dorkbox.Licensing") version "2.24"
+    id("com.dorkbox.VersionUpdate") version "2.8"
+    id("com.dorkbox.GradlePublish") version "1.18"
 }
 
 object Extras {
     // set for the project
     const val description = "Property annotation and loader for fields"
     const val group = "com.dorkbox"
-    const val version = "1.2"
+    const val version = "1.3"
 
     // set as project.ext
     const val name = "PropertyLoader"
@@ -43,8 +41,6 @@ object Extras {
     const val vendor = "Dorkbox LLC"
     const val vendorUrl = "https://dorkbox.com"
     const val url = "https://git.dorkbox.com/dorkbox/PropertyLoader"
-
-    val buildDate = Instant.now().toString()
 }
 
 ///////////////////////////////
@@ -74,7 +70,7 @@ tasks.jar.get().apply {
         attributes["Specification-Vendor"] = Extras.vendor
 
         attributes["Implementation-Title"] = "${Extras.group}.${Extras.id}"
-        attributes["Implementation-Version"] = Extras.buildDate
+        attributes["Implementation-Version"] = GradleUtils.now()
         attributes["Implementation-Vendor"] = Extras.vendor
     }
 }
