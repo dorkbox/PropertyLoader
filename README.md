@@ -13,7 +13,7 @@ Maven Info
     <dependency>
       <groupId>com.dorkbox</groupId>
       <artifactId>PropertyLoader</artifactId>
-      <version>1.3</version>
+      <version>1.4</version>
     </dependency>
 </dependencies>
 ```
