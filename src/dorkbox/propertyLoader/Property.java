@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 dorkbox, llc
+ * Copyright 2023 dorkbox, llc
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ import java.lang.annotation.Target;
  * <br>
  *  Loading arguments is left for the end-user application. Using an annotation detector to load/save properties is recommended.
  *  <br>
- *  For example (if implemented): -Ddorkbox.Args.Debug=true
+ *  For example (if implemented): -DmyApp.enable_debug=true
  */
 @Retention(value = RetentionPolicy.RUNTIME)
 @Target(value = {ElementType.FIELD})
@@ -38,4 +38,9 @@ public
      * This is used to mark a unique value for the property, in case the object name is used elsewhere, is generic, or is repeated.
      */
     String alias() default "";
+
+    /**
+     * This is used to set a description of the property, where it's defined.
+     */
+    String description() default "";
 }
